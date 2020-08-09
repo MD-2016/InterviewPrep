@@ -2,12 +2,14 @@ public class OneAway {
 
     public static void main(String[] args) {
         String str = "gfg";
-        String str2 = "gf";
+        String str2 = "gfg";
         String s1 = "";
         String s2 = "";
         System.out.println(oneEdit(str,str2));
         System.out.println(isOneEdit(str,str2));
         System.out.println(isOneEdit(s1,s2));
+        System.out.println(oneEditAway(str,str2));
+        System.out.println(oneEditAway(s1,s2));
         System.out.println(oneEdit(s1,s2));
     }
 
@@ -66,7 +68,7 @@ public class OneAway {
         {
             count++;
         }
-        return count == 1;
+        return count == 1 || count == 0;
     }
 
     /* Better Approach?
@@ -78,7 +80,7 @@ public class OneAway {
         int in1 = s1.length();
         int in2 = s2.length();
 
-        if(Math.abs(in1 - in2) == 2 || s1.equals(s2))
+        if(Math.abs(in1 - in2) >= 2)
         {
             return false;
         }
@@ -103,7 +105,37 @@ public class OneAway {
                 }
             }
         }
-        return Math.abs(in1 - in2) == 1;
+        //return true;
+        return Math.abs(in1 - in2) == 1 || Math.abs(in1 - in2) == 0;
+    }
+
+    public static boolean oneEditAway(String first, String second) {
+        /* Length checks. */
+        if (Math.abs(first.length() - second.length()) > 1) {
+            return false;
+        }
+
+        /* Get shorter and longer string.*/
+        String s1 = first.length() < second.length() ? first : second;
+        String s2 = first.length() < second.length() ? second : first;
+
+        int index1 = 0;
+        int index2 = 0;
+        boolean foundDifference = false;
+        while (index2 < s2.length() && index1 < s1.length()) {
+            if (s1.charAt(index1) != s2.charAt(index2)) {
+                /* Ensure that this is the first difference found.*/
+                if (foundDifference) return false;
+                foundDifference = true;
+                if (s1.length() == s2.length()) { // On replace, move shorter pointer
+                    index1++;
+                }
+            } else {
+                index1++; // If matching, move shorter pointer
+            }
+            index2++; // Always move pointer for longer string
+        }
+        return true;
     }
 
 }
