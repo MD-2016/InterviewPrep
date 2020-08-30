@@ -31,7 +31,7 @@ public class MinimalTree {
 
        public boolean isBST() {
            if (left != null) {
-               if (data < left.data || !left.isBST()) {
+               if (data <= left.data || !left.isBST()) {
                    return false;
                }
            }
