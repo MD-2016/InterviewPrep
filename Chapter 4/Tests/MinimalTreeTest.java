@@ -53,4 +53,24 @@ class MinimalTreeTest {
         assertEquals(false, minTree.isBST());
     }
 
+    @Test
+    public void testMinHeightStartGreaterThanEnd()
+    {
+        int[] arr = {2,3,4,5};
+        MinimalTree.MHBSTNode minTree = minimalTreeHeight.convert(arr, arr.length-1, 0);
+        assertNull(minTree);
+    }
+    
+
+    @Test
+    public void testIsBSTLeftSubtreeFail()
+    {
+        int[] arrNotBST = {5,5,6,7};
+        MinimalTree.MHBSTNode minTree = minimalTreeHeight.convert(arrNotBST, 0, arrNotBST.length-1);
+        assertEquals(false, minTree.isBST());
+        assertEquals(3, minTree.height());
+        assertEquals(5,minTree.data);
+
+    }
+
 }
