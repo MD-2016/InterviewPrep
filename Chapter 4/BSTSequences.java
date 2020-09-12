@@ -88,14 +88,7 @@ public class BSTSequences {
 
     public static void main(String[] args)
     {
-        Node root = new Node(2);
-        //root.left = new Node(1);
-        root.right = new Node(3);
-        ArrayList<LinkedList<Integer>> allSeq = BST.bstSequences(root);
-        for(LinkedList<Integer> list : allSeq)
-        {
-            System.out.println(list);
-        }
+       
     }
 
 }
